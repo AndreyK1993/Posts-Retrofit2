@@ -8,9 +8,9 @@ import retrofit2.http.Path;
 
 public interface ApiService {
 
-    @GET("api/posts")
-    Call<PostsResponse> getUsers();
+    @GET("posts")
+    Call<PostsResponse> getPosts();
 
-    @GET("api/posts/{id}")
-    Call<PostResponse> getUserById(@Path("id") int id);
+    @GET("posts/{id}")
+    Call<PostResponse> getPostById(@Path("id") int id);
 }

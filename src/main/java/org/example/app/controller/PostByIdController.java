@@ -45,7 +45,7 @@ public class PostByIdController {
 
             // Проверяем, не является ли post null перед его использованием
             if (post != null) {
-                return "Post: id " + post.getPostId() + ", " + post.getTitle() +
+                return "Post: id " + post.getUserId() + ", " + post.getTitle() +
                         " " + post.getId() + ", " + post.getBody();
             } else {
                 return "Failed to convert JSON to Post object";

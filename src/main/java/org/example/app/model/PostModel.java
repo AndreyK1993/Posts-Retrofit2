@@ -16,7 +16,7 @@ public class PostModel {
 
         ApiClient client = new ApiClient();
         ApiService service = client.getApiService();
-        Call<PostsResponse> call = service.getUsers();
+        Call<PostsResponse> call = service.getPosts();
         Optional<Response<PostsResponse>> optional;
 
         try {
@@ -32,7 +32,7 @@ public class PostModel {
     public Optional<Response<PostResponse>> fetchPostById(int id) {
         ApiClient client = new ApiClient();
         ApiService service = client.getApiService();
-        Call<PostResponse> call = service.getUserById(id);
+        Call<PostResponse> call = service.getPostById(id);
         Optional<Response<PostResponse>> optional;
 
         try {
