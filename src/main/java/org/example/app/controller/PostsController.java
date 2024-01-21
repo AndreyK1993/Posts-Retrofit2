@@ -24,29 +24,29 @@ public class PostsController {
         this.view = view;
     }
 
-    public void getUsers() {
-        view.getOutput(readUsers());
+    public void getPosts() {
+        view.getOutput(readPosts());
         AppStarter.startApp();
     }
 
-    private String readUsers() {
-        Optional<Response<PostsResponse>> optional = model.fetchUsers();
+    private String readPosts() {
+        Optional<Response<PostsResponse>> optional = model.fetchPosts();
         if (optional.isEmpty()) {
             return Constants.NO_DATA_MSG;
         } else {
 
             Gson gson = new Gson();
-            List<Post> users = gson.fromJson(String.valueOf(optional.get().body()),
+            List<Post> posts = gson.fromJson(String.valueOf(optional.get().body()),
                     new TypeToken<List<Post>>() {}.getType());
 
             StringBuilder stringBuilder = new StringBuilder();
             AtomicInteger cnt = new AtomicInteger(0);
             String str;
 
-            for (Post user : users) {
-                str = cnt.incrementAndGet() + ") User: id " + user.getId() + ", " +
-                        user.getLastName() + " " + user.getFirstName() + ", " +
-                        user.getEmail() + "\n";
+            for (Post post : posts) {
+                str = cnt.incrementAndGet() + ") Post: id " + post.getId() + ", " +
+                        post.getLastName() + " " + post.getFirstName() + ", " +
+                        post.getEmail() + "\n";
                 stringBuilder.append(str);
             }
             return stringBuilder.toString();

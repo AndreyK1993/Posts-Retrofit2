@@ -22,24 +22,24 @@ public class PostByIdController {
         this.view = view;
     }
 
-    public void getUserById() {
-        view.getOutput(readUserById(
+    public void getPostById() {
+        view.getOutput(readPostById(
                 Integer.parseInt(view.getData())
         ));
         AppStarter.startApp();
     }
 
-    private String readUserById(int id) {
-        Optional<Response<PostResponse>> optional = model.fetchUserById(id);
+    private String readPostById(int id) {
+        Optional<Response<PostResponse>> optional = model.fetchPostById(id);
 
         if (optional.isEmpty()) {
             return Constants.NO_DATA_MSG;
         } else {
             Gson gson = new Gson();
-            Post user = gson.fromJson(String.valueOf(optional.get().body()),
+            Post post = gson.fromJson(String.valueOf(optional.get().body()),
                     new TypeToken<Post>() {}.getType());
-            return "User: id " + user.getId() + ", " + user.getLastName() +
-                    " " + user.getFirstName() + ", " + user.getEmail();
+            return "Post: id " + post.getId() + ", " + post.getLastName() +
+                    " " + post.getFirstName() + ", " + post.getEmail();
         }
     }
 }

@@ -11,13 +11,13 @@ public class AppModel {
         PostModel model = new PostModel();
         PostsView view = new PostsView();
         PostsController controller = new PostsController(model, view);
-        controller.getUsers();
+        controller.getPosts();
     }
 
     public void readUserById() {
         PostModel model = new PostModel();
         PostByIdView view = new PostByIdView();
         PostByIdController controller = new PostByIdController(model, view);
-        controller.getUserById();
+        controller.getPostById();
     }
 }

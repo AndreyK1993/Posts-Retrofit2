@@ -12,7 +12,7 @@ import java.util.Optional;
 public class PostModel {
 
     // REST api/users
-    public Optional<Response<PostsResponse>> fetchUsers() {
+    public Optional<Response<PostsResponse>> fetchPosts() {
 
         ApiClient client = new ApiClient();
         ApiService service = client.getApiService();
@@ -29,7 +29,7 @@ public class PostModel {
     }
 
     // REST api/users/{id}
-    public Optional<Response<PostResponse>> fetchUserById(int id) {
+    public Optional<Response<PostResponse>> fetchPostById(int id) {
         ApiClient client = new ApiClient();
         ApiService service = client.getApiService();
         Call<PostResponse> call = service.getUserById(id);
