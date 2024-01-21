@@ -38,8 +38,8 @@ public class PostByIdController {
             Gson gson = new Gson();
             Post post = gson.fromJson(String.valueOf(optional.get().body()),
                     new TypeToken<Post>() {}.getType());
-            return "Post: id " + post.getId() + ", " + post.getLastName() +
-                    " " + post.getFirstName() + ", " + post.getEmail();
+            return "Post: id " + post.getUserId() + ", " + post.getTitle() +
+                    " " + post.getId() + ", " + post.getBody();
         }
     }
 }

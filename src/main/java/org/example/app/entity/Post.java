@@ -1,39 +1,33 @@
 package org.example.app.entity;
 
-import com.google.gson.annotations.SerializedName;
-
 public class Post {
 
-    @SerializedName("id")
+    private final int userId;
     private final int id;
-    @SerializedName("first_name")
-    private final String firstName;
-    @SerializedName("last_name")
-    private final String lastName;
-    @SerializedName("email")
-    private final String email;
+    private final String title;
+    private final String body;
 
-    public Post(int id, String firstName, String lastName, String email) {
+    public Post(int userId, int id, String title, String body) {
+        this.userId = userId;
         this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
+        this.title = title;
+        this.body = body;
+    }
+
+    public int getUserId() {
+        return userId;
     }
 
     public int getId() {
         return id;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getTitle() {
+        return title;
     }
 
-    public String getLastName() {
-        return lastName;
-    }
-
-    public String getEmail() {
-        return email;
+    public String getBody() {
+        return body;
     }
 
     //    @Override
@@ -49,10 +43,10 @@ public class Post {
 
     @Override
     public String toString() {
-        return "{\"id\":" + id + "," +
-                "\"first_name\":\"" + firstName + "\"," +
-                "\"last_name\":\"" + lastName + "\"," +
-                "\"email\":\"" + email + "\"}";
+        return "{\"userId\":" + userId + "," +
+                "\"id\":\"" + id + "\"," +
+                "\"title\":\"" + title + "\"," +
+                "\"body\":\"" + body + "\"}";
     }
 
 }

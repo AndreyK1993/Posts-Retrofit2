@@ -11,7 +11,7 @@ import java.util.Optional;
 
 public class PostModel {
 
-    // REST api/users
+    // REST api/posts
     public Optional<Response<PostsResponse>> fetchPosts() {
 
         ApiClient client = new ApiClient();
@@ -28,7 +28,7 @@ public class PostModel {
         return optional;
     }
 
-    // REST api/users/{id}
+    // REST api/posts/{id}
     public Optional<Response<PostResponse>> fetchPostById(int id) {
         ApiClient client = new ApiClient();
         ApiService service = client.getApiService();

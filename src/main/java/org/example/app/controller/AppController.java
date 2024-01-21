@@ -20,8 +20,8 @@ public class AppController {
 
     private void filterChoice(int choice) {
         switch (choice) {
-            case 1 -> model.readUsers();
-            case 2 -> model.readUserById();
+            case 1 -> model.readPosts();
+            case 2 -> model.readPostById();
             case 0 -> {
                 String output = Constants.APP_CLOSED_MSG;
                 view.getOutput(output, Integer.toString(choice));
