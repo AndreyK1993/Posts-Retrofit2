@@ -44,7 +44,7 @@ public class PostsController {
             String str;
 
             for (Post post : posts) {
-                str = cnt.incrementAndGet() + ") Post: id " + post.getUserId() + ", " +
+                str = cnt.incrementAndGet() + ") Post: id " + post.getPostId() + ", " +
                         post.getTitle() + " " + post.getId() + ", " +
                         post.getBody() + "\n";
                 stringBuilder.append(str);

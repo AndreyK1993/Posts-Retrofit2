@@ -14,7 +14,7 @@ public class Post {
         this.body = body;
     }
 
-    public int getUserId() {
+    public int getPostId() {
         return userId;
     }
 

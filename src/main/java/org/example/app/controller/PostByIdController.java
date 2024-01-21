@@ -35,11 +35,22 @@ public class PostByIdController {
         if (optional.isEmpty()) {
             return Constants.NO_DATA_MSG;
         } else {
+            // Добавляем код для логирования JSON-ответа и объекта Post
+            String jsonResponse = String.valueOf(optional.get().body());
+            System.out.println("JSON Response: " + jsonResponse);
+
             Gson gson = new Gson();
-            Post post = gson.fromJson(String.valueOf(optional.get().body()),
-                    new TypeToken<Post>() {}.getType());
-            return "Post: id " + post.getUserId() + ", " + post.getTitle() +
-                    " " + post.getId() + ", " + post.getBody();
+            Post post = gson.fromJson(jsonResponse, new TypeToken<Post>() {}.getType());
+            System.out.println("Converted Post: " + post);
+
+            // Проверяем, не является ли post null перед его использованием
+            if (post != null) {
+                return "Post: id " + post.getPostId() + ", " + post.getTitle() +
+                        " " + post.getId() + ", " + post.getBody();
+            } else {
+                return "Failed to convert JSON to Post object";
+            }
         }
     }
+
 }
