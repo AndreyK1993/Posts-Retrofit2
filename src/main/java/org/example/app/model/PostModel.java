@@ -1,5 +1,6 @@
 package org.example.app.model;
 
+import org.example.app.entity.Post;
 import org.example.app.entity.PostResponse;
 import org.example.app.entity.PostsResponse;
 import org.example.app.network.ApiClient;
@@ -13,11 +14,11 @@ import java.util.List;
 public class PostModel {
 
     // REST api/posts
-    public Optional<Response<List<PostsResponse>>> fetchPosts() {
+    public Optional<Response<List<Post>>> fetchPosts() {
         ApiClient client = new ApiClient();
         ApiService service = client.getApiService();
-        Call<List<PostsResponse>> call = service.getPosts();
-        Optional<Response<List<PostsResponse>>> optional;
+        Call<List<Post>> call = service.getPosts();
+        Optional<Response<List<Post>>> optional;
 
         try {
             optional = Optional.ofNullable(call.execute());
@@ -29,11 +30,11 @@ public class PostModel {
     }
 
     // REST api/posts/{id}
-    public Optional<Response<PostResponse>> fetchPostById(int id) {
+    public Optional<Response<Post>> fetchPostById(int id) {
         ApiClient client = new ApiClient();
         ApiService service = client.getApiService();
-        Call<PostResponse> call = service.getPostById(id);
-        Optional<Response<PostResponse>> optional;
+        Call<Post> call = service.getPostById(id);
+        Optional<Response<Post>> optional;
 
         try {
             optional = Optional.of(call.execute());

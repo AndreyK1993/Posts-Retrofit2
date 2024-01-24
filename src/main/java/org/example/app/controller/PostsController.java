@@ -30,12 +30,12 @@ public class PostsController {
     }
 
     private String readPosts() {
-        Optional<Response<List<PostsResponse>>> optional = model.fetchPosts();
+        Optional<Response<List<Post>>> optional = model.fetchPosts();
         if (optional.isEmpty()) {
             System.out.println("Error fetching posts");
             return Constants.NO_DATA_MSG;
         } else {
-            Response<List<PostsResponse>> response = optional.get();
+            Response<List<Post>> response = optional.get();
             if (!response.isSuccessful()) {
                 System.out.println("Error: " + response.code() + " - " + response.message());
                 return Constants.NO_DATA_MSG;

@@ -1,5 +1,6 @@
 package org.example.app.network;
 
+import org.example.app.entity.Post;
 import org.example.app.entity.PostResponse;
 import org.example.app.entity.PostsResponse;
 import retrofit2.Call;
@@ -10,9 +11,9 @@ import java.util.List;
 
 public interface ApiService {
 
-    @GET("api/posts")
-    Call<List<PostsResponse>> getPosts();
+    @GET("posts")
+    Call<List<Post>> getPosts();
 
-    @GET("api/posts/{id}")
-    Call<PostResponse> getPostById(@Path("id") int id);
+    @GET("posts/{id}")
+    Call<Post> getPostById(@Path("id") int id);
 }
