@@ -1,10 +1,15 @@
 package org.example.app.entity;
 
-public class Post {
+import com.google.gson.annotations.SerializedName;
 
+public class Post {
+    @SerializedName("userId")
     private final int userId;
+    @SerializedName("id")
     private final int id;
+    @SerializedName("title")
     private final String title;
+    @SerializedName("body")
     private final String body;
 
     public Post(int userId, int id, String title, String body) {
@@ -29,17 +34,6 @@ public class Post {
     public String getBody() {
         return body;
     }
-
-    //    @Override
-//    public String toString() {
-//        return "User{" +
-//                "id=" + id +
-//                ", firstName='" + firstName + '\'' +
-//                ", lastName='" + lastName + '\'' +
-//                ", email='" + email + '\'' +
-//                '}';
-//    }
-
 
     @Override
     public String toString() {

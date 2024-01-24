@@ -1,22 +1,41 @@
 package org.example.app.entity;
 
+import com.google.gson.annotations.SerializedName;
+
 public class PostResponse {
 
-    private final Post data;
+    @SerializedName("userId")
+    private int userId;
+    @SerializedName("id")
+    private int id;
+    @SerializedName("title")
+    private String title;
+    @SerializedName("body")
+    private String body;
 
-    public PostResponse(Post data) {
-        this.data = data;
+    public int getUserId() {
+        return userId;
     }
 
-//    @Override
-//    public String toString() {
-//        return "UserResponse{" +
-//                "data=" + data +
-//                '}';
-//    }
+    public int getId() {
+        return id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getBody() {
+        return body;
+    }
 
     @Override
     public String toString() {
-        return "" + data;
+        return "PostResponse{" +
+                "userId=" + userId +
+                ", id=" + id +
+                ", title='" + title + '\'' +
+                ", body='" + body + '\'' +
+                '}';
     }
 }

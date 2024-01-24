@@ -6,11 +6,13 @@ import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 
+import java.util.List;
+
 public interface ApiService {
 
-    @GET("posts")
-    Call<PostsResponse> getPosts();
+    @GET("api/posts")
+    Call<List<PostsResponse>> getPosts();
 
-    @GET("posts/{id}")
+    @GET("api/posts/{id}")
     Call<PostResponse> getPostById(@Path("id") int id);
 }

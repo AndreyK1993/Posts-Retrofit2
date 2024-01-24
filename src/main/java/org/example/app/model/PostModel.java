@@ -8,19 +8,19 @@ import retrofit2.Call;
 import retrofit2.Response;
 
 import java.util.Optional;
+import java.util.List;
 
 public class PostModel {
 
     // REST api/posts
-    public Optional<Response<PostsResponse>> fetchPosts() {
-
+    public Optional<Response<List<PostsResponse>>> fetchPosts() {
         ApiClient client = new ApiClient();
         ApiService service = client.getApiService();
-        Call<PostsResponse> call = service.getPosts();
-        Optional<Response<PostsResponse>> optional;
+        Call<List<PostsResponse>> call = service.getPosts();
+        Optional<Response<List<PostsResponse>>> optional;
 
         try {
-            optional = Optional.of(call.execute());
+            optional = Optional.ofNullable(call.execute());
         } catch (Exception ex) {
             optional = Optional.empty();
         }

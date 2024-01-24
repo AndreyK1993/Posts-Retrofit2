@@ -10,13 +10,6 @@ public class PostsResponse {
         this.data = data;
     }
 
-//    @Override
-//    public String toString() {
-//        return "UsersResponse{" +
-//                "data=" + data +
-//                '}';
-//    }
-
     @Override
     public String toString() {
         return "" + data;

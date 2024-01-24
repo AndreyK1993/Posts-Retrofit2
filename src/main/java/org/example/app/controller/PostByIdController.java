@@ -1,7 +1,6 @@
 package org.example.app.controller;
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import org.example.app.entity.Post;
 import org.example.app.entity.PostResponse;
 import org.example.app.model.PostModel;
@@ -14,8 +13,8 @@ import java.util.Optional;
 
 public class PostByIdController {
 
-    PostModel model;
-    PostByIdView view;
+    private final PostModel model;
+    private final PostByIdView view;
 
     public PostByIdController(PostModel model, PostByIdView view) {
         this.model = model;
@@ -23,9 +22,7 @@ public class PostByIdController {
     }
 
     public void getPostById() {
-        view.getOutput(readPostById(
-                Integer.parseInt(view.getData())
-        ));
+        view.getOutput(readPostById(Integer.parseInt(view.getData())));
         AppStarter.startApp();
     }
 
@@ -35,16 +32,17 @@ public class PostByIdController {
         if (optional.isEmpty()) {
             return Constants.NO_DATA_MSG;
         } else {
-            // Добавляем код для логирования JSON-ответа и объекта Post
-            String jsonResponse = String.valueOf(optional.get().body());
-            System.out.println("JSON Response: " + jsonResponse);
+            Response<PostResponse> response = optional.get();
 
-            Gson gson = new Gson();
-            Post post = gson.fromJson(jsonResponse, new TypeToken<Post>() {}.getType());
-            System.out.println("Converted Post: " + post);
+            if (!response.isSuccessful()) {
+                System.out.println("Error: " + response.code() + " - " + response.message());
+                return Constants.NO_DATA_MSG;
+            }
 
-            // Проверяем, не является ли post null перед его использованием
-            if (post != null) {
+            PostResponse postResponse = response.body();
+
+            if (postResponse != null) {
+                PostResponse post = postResponse;
                 return "Post: id " + post.getUserId() + ", " + post.getTitle() +
                         " " + post.getId() + ", " + post.getBody();
             } else {

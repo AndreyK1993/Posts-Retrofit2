@@ -30,26 +30,38 @@ public class PostsController {
     }
 
     private String readPosts() {
-        Optional<Response<PostsResponse>> optional = model.fetchPosts();
+        Optional<Response<List<PostsResponse>>> optional = model.fetchPosts();
         if (optional.isEmpty()) {
+            System.out.println("Error fetching posts");
             return Constants.NO_DATA_MSG;
         } else {
+            Response<List<PostsResponse>> response = optional.get();
+            if (!response.isSuccessful()) {
+                System.out.println("Error: " + response.code() + " - " + response.message());
+                return Constants.NO_DATA_MSG;
+            }
 
             Gson gson = new Gson();
-            List<Post> posts = gson.fromJson(String.valueOf(optional.get().body()),
+            List<Post> posts = gson.fromJson(String.valueOf(response.body()),
                     new TypeToken<List<Post>>() {}.getType());
 
-            StringBuilder stringBuilder = new StringBuilder();
-            AtomicInteger cnt = new AtomicInteger(0);
-            String str;
+            if (posts != null) {
+                // Ваш текущий код обработки списка
+                StringBuilder stringBuilder = new StringBuilder();
+                AtomicInteger cnt = new AtomicInteger(0);
+                String str;
 
-            for (Post post : posts) {
-                str = cnt.incrementAndGet() + ") Post: id " + post.getUserId() + ", " +
-                        post.getTitle() + " " + post.getId() + ", " +
-                        post.getBody() + "\n";
-                stringBuilder.append(str);
+                for (Post post : posts) {
+                    str = cnt.incrementAndGet() + ") Post: id " + post.getUserId() + ", " +
+                            post.getTitle() + " " + post.getId() + ", " +
+                            post.getBody() + "\n";
+                    stringBuilder.append(str);
+                }
+                return stringBuilder.toString();
+            } else {
+                System.out.println("Error: Empty posts list");
+                return Constants.NO_DATA_MSG;
             }
-            return stringBuilder.toString();
         }
     }
 }
