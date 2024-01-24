@@ -1,6 +1,7 @@
 package org.example.app.controller;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import org.example.app.entity.Post;
 import org.example.app.entity.PostResponse;
 import org.example.app.model.PostModel;
@@ -13,8 +14,8 @@ import java.util.Optional;
 
 public class PostByIdController {
 
-    private final PostModel model;
-    private final PostByIdView view;
+    PostModel model;
+    PostByIdView view;
 
     public PostByIdController(PostModel model, PostByIdView view) {
         this.model = model;
@@ -42,13 +43,22 @@ public class PostByIdController {
             PostResponse postResponse = response.body();
 
             if (postResponse != null) {
-                PostResponse post = postResponse;
-                return "Post: id " + post.getUserId() + ", " + post.getTitle() +
-                        " " + post.getId() + ", " + post.getBody();
+                Post post = convertPostResponseToPost(postResponse);
+                if (post != null) {
+                    return "Post: id " + post.getUserId() + ", " + post.getTitle() +
+                            " " + post.getId() + ", " + post.getBody();
+                } else {
+                    return "Failed to convert PostResponse to Post object";
+                }
             } else {
-                return "Failed to convert JSON to Post object";
+                return "Failed to convert JSON to PostResponse object";
             }
         }
     }
 
+    private Post convertPostResponseToPost(PostResponse postResponse) {
+        Gson gson = new Gson();
+        String postJson = gson.toJson(postResponse);
+        return gson.fromJson(postJson, Post.class);
+    }
 }
